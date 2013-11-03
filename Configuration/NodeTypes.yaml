@@ -139,10 +139,46 @@
       ui:
         inlineEditable: true
 
-'RobertLemke.Plugin.Blog:PostPlugin':
+'RobertLemke.Plugin.Blog:LatestPosts':
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
-    label: 'Blog Post Overview'
-    group: plugins
-    icon: 'icon-puzzle-piece'
+    group: 'blog'
+    label: 'Latest Posts Teaser'
+    inspector:
+      groups:
+        teaser:
+          label: 'Teaser'
+  properties:
+    maximumNumberOfPosts:
+      type: integer
+      ui:
+        label: 'Maximum number of posts'
+        reloadIfChanged: true
+        inspector:
+          group: teaser
+          editor: Content/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              0:
+                label: 'Infinite'
+              1:
+                label: 1
+              2:
+                label: 2
+              3:
+                label: 3
+              4:
+                label: 4
+              5:
+                label: 5
+              6:
+                label: 6
+              7:
+                label: 7
+              8:
+                label: 8
+              9:
+                label: 9
+              10:
+                label: 10

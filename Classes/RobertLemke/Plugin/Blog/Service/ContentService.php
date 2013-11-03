@@ -40,7 +40,12 @@ class ContentService {
 	public function renderTeaser(NodeInterface $node) {
 		$stringToTruncate = '';
 
-		foreach ($node->getNode('main')->getChildNodes('TYPO3.Neos.NodeTypes:Text') as $contentNode) {
+		$contentCollectionNode = $node->getNode('main');
+		if (!$contentCollectionNode instanceof NodeInterface) {
+			return '';
+		}
+
+		foreach ($contentCollectionNode->getChildNodes('TYPO3.Neos.NodeTypes:Text') as $contentNode) {
 			foreach ($contentNode->getProperties() as $propertyValue) {
 				if (!is_object($propertyValue) || method_exists($propertyValue, '__toString')) {
 					$stringToTruncate .= $propertyValue;

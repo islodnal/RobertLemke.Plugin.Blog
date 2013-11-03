@@ -70,3 +70,21 @@ prototype(RobertLemke.Plugin.Blog:Quote) < prototype(TYPO3.Neos:Template) {
 	citeUri = ${q(node).property('citeUri')}
 	text = ${q(node).property('text')}
 }
+
+#
+# A teaser which shows a list of the latest blog posts
+#
+prototype(RobertLemke.Plugin.Blog:LatestPosts) < prototype(TYPO3.Neos:Template) {
+	templatePath = 'resource://RobertLemke.Plugin.Blog/Private/Templates/TypoScript/LatestPosts.html'
+
+	maximumNumberOfPosts = ${q(node).property('maximumNumberOfPosts')}
+
+	postsContainerQ = ${q(node).find('/sites/robertlemkecom/en/blog')}
+	postsContainer = ${this.postsContainerQ.get(0)}
+	promotedPostQ = ${this.postsContainerQ.children('[instanceof RobertLemke.Plugin.Blog:Post]').first()}
+	promotedPost = ${this.promotedPostQ.get(0)}
+
+	imageNode = ${this.promotedPostQ.find('main').children('[instanceof TYPO3.Neos.NodeTypes:Image]').get(0)}
+	imageMaximumWidth = image.properties.maximumWidth
+	imageMaximumHeight = image.properties.maximumHeight
+}

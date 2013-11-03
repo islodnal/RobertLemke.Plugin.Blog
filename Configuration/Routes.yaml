@@ -12,32 +12,11 @@
     '@action': 'create'
 
 # http://example.dev/en/blog
-# ?--typo3_neos_nodetypes_typoscript_pluginimplementation[@package]=RobertLemke.Plugin.Blog
-# &--typo3_neos_nodetypes_typoscript_pluginimplementation[@controller]=Post
-# &--typo3_neos_nodetypes_typoscript_pluginimplementation[@action]=index
-# &--typo3_neos_nodetypes_typoscript_pluginimplementation[--typo3-typo3cr-viewhelpers-widget-paginateviewhelper][@package]=
-# &--typo3_neos_nodetypes_typoscript_pluginimplementation[--typo3-typo3cr-viewhelpers-widget-paginateviewhelper][@subpackage]=
-# &--typo3_neos_nodetypes_typoscript_pluginimplementation[--typo3-typo3cr-viewhelpers-widget-paginateviewhelper][@controller]=
-# &--typo3_neos_nodetypes_typoscript_pluginimplementation[--typo3-typo3cr-viewhelpers-widget-paginateviewhelper][@action]=index
-# &--typo3_neos_nodetypes_typoscript_pluginimplementation[--typo3-typo3cr-viewhelpers-widget-paginateviewhelper][currentPage]=2
-
--
-  name: 'Blog post creation'
-  uriPattern:    '{node}/post/create'
-  defaults:
-    '@package':    'TYPO3.Neos'
-    '@controller': 'Frontend\Node'
-    '@format':     'html'
-    '@action':     'show'
-    '--typo3_neos_nodetypes_typoscript_pluginimplementation':
-      '@package': 'RobertLemke.Plugin.Blog'
-      '@controller': 'Post'
-      '@action': 'create'
-      '@format': 'html'
-  routeParts:
-    node:
-      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
-  appendExceedingArguments: true
+# ?--posts-paginator[@package]=
+# &--posts-paginator[@subpackage]=
+# &--posts-paginator[@controller]=
+# &--posts-paginator[@action]=index
+# &--posts-paginator[currentPage]=2
 
 -
   name: 'Blog post pagination default'
@@ -47,16 +26,12 @@
     '@controller': 'Frontend\Node'
     '@format':     'html'
     '@action':     'show'
-    '--typo3_neos_nodetypes_typoscript_pluginimplementation':
-      '@package': 'RobertLemke.Plugin.Blog'
-      '@controller': 'Post'
+    '--posts-paginator':
+      '@package': ''
+      '@subpackage': ''
+      '@controller': ''
       '@action': 'index'
-      '--posts-paginator':
-        '@package': ''
-        '@subpackage': ''
-        '@controller': ''
-        '@action': 'index'
-        'currentPage': ''
+      'currentPage': ''
   routeParts:
     node:
       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
@@ -64,21 +39,17 @@
 
 -
   name: 'Blog post pagination - page > 1'
-  uriPattern:    '{node}/page/{--typo3_neos_nodetypes_typoscript_pluginimplementation.--posts-paginator.currentPage}'
+  uriPattern:    '{node}/page/{--posts-paginator.currentPage}'
   defaults:
     '@package':    'TYPO3.Neos'
     '@controller': 'Frontend\Node'
     '@format':     'html'
     '@action':     'show'
-    '--typo3_neos_nodetypes_typoscript_pluginimplementation':
-      '@package': 'RobertLemke.Plugin.Blog'
-      '@controller': 'Post'
+    '--posts-paginator':
+      '@package': ''
+      '@subpackage': ''
+      '@controller': ''
       '@action': 'index'
-      '--posts-paginator':
-        '@package': ''
-        '@subpackage': ''
-        '@controller': ''
-        '@action': 'index'
   routeParts:
     node:
       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
